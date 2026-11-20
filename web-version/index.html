@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>GRADE<span>PRO</span></h2>
+                <p>Student Management</p>
+            </div>
+
+            <nav>
+                <a href="#dashboard" class="active">Dashboard</a>
+                <a href="#register">Register Student</a>
+                <a href="#add-marks">Add Student Marks</a>
+                <a href="#records">Student Records</a>
+                <a href="#reports">Performance Reports</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Student Grade System</p>
+                <small>Version 1.0</small>
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="top-header">
+                <div>
+                    <h1>Student Dashboard</h1>
+                    <p>Manage student records and academic performance.</p>
+                </div>
+
+                <button id="refresh-button" class="secondary-button">
+                    Refresh Data
+                </button>
+            </header>
+
+
+            <!-- DASHBOARD -->
+            <section id="dashboard">
+
+                <div class="section-heading">
+                    <h2>Overview</h2>
+                    <p>Your academic statistics at a glance.</p>
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <p>Total Students</p>
+                        <h2 id="total-students">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Overall Average</p>
+                        <h2 id="overall-average">0%</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Students with Grade A</p>
+                        <h2 id="grade-a-count">0</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Top Grade</p>
+                        <h2 id="top-grade">-</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="top-student-card">
+                    <div>
+                        <p>Top Performing Student</p>
+                        <h2 id="top-student">No student data available</h2>
+                    </div>
+                    <span class="top-badge">TOP PERFORMER</span>
+                </div>
+
+            </section>
+
+
+            <!-- REGISTER STUDENT -->
+            <section id="register" class="content-section">
+
+                <div class="section-heading">
+                    <h2>Register Student</h2>
+                    <p>Add a new student to the system.</p>
+                </div>
+
+                <form id="student-form">
+
+                    <div class="form-group">
+                        <label for="admission-number">Admission Number</label>
+                        <input
+                            type="text"
+                            id="admission-number"
+                            placeholder="e.g. JKUAT001"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="student-name">Full Name</label>
+                        <input
+                            type="text"
+                            id="student-name"
+                            placeholder="Enter student's name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="student-course">Course</label>
+                        <input
+                            type="text"
+                            id="student-course"
+                            placeholder="e.g. Mathematics and Computer Science"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="primary-button">
+                        Register Student
+                    </button>
+
+                    <p id="form-message" class="message"></p>
+
+                </form>
+
+            </section>
+
+
+            <!-- ADD MARKS -->
+            <section id="add-marks" class="content-section">
+
+                <div class="section-heading">
+                    <h2>Add Student Marks</h2>
+                    <p>Record academic marks for registered students.</p>
+                </div>
+
+                <form id="marks-form">
+
+                    <div class="form-group">
+                        <label for="marks-admission">Admission Number</label>
+                        <input
+                            type="text"
+                            id="marks-admission"
+                            placeholder="Enter admission number"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject-name">Subject</label>
+                        <input
+                            type="text"
+                            id="subject-name"
+                            placeholder="e.g. Mathematics"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject-mark">Marks (0-100)</label>
+                        <input
+                            type="number"
+                            id="subject-mark"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                            placeholder="Enter marks"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="primary-button">
+                        Save Marks
+                    </button>
+
+                    <p id="marks-message" class="message"></p>
+
+                </form>
+
+            </section>
+
+
+            <!-- STUDENT RECORDS -->
+            <section id="records" class="content-section">
+
+                <div class="section-heading">
+                    <h2>Student Records</h2>
+                    <p>View and manage registered students.</p>
+                </div>
+
+                <div class="search-container">
+                    <input
+                        type="search"
+                        id="search-input"
+                        placeholder="Search by name, admission number or course..."
+                    >
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Admission</th>
+                                <th>Name</th>
+                                <th>Course</th>
+                                <th>Average</th>
+                                <th>Grade</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="students-table">
+                            <tr>
+                                <td colspan="6">Loading students...</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- PERFORMANCE REPORTS -->
+            <section id="reports" class="content-section">
+
+                <div class="section-heading">
+                    <h2>Performance Reports</h2>
+                    <p>Understand student academic performance.</p>
+                </div>
+
+                <div class="report-card">
+
+                    <h3>Grade Distribution</h3>
+
+                    <div id="grade-distribution">
+                        No performance data available.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- STUDENT PERFORMANCE MODAL -->
+            <div id="student-modal" class="modal">
+
+                <div class="modal-content">
+
+                    <button
+                        id="close-modal"
+                        class="close-button"
+                        aria-label="Close"
+                    >
+                        &times;
+                    </button>
+
+                    <h2>Student Performance</h2>
+
+                    <div id="student-details"></div>
+
+                    <h3>Subject Performance</h3>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Marks</th>
+                                    <th>Grade</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="subject-performance"></tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="performance-summary">
+
+                        <div>
+                            <p>Total Marks</p>
+                            <h3 id="student-total">0</h3>
+                        </div>
+
+                        <div>
+                            <p>Average</p>
+                            <h3 id="student-average">0%</h3>
+                        </div>
+
+                        <div>
+                            <p>Overall Grade</p>
+                            <h3 id="student-grade">-</h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <footer class="footer">
+                <p>Student Grade Management System &copy; 2026</p>
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
